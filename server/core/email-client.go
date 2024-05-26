@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -16,7 +17,7 @@ import (
  * @return Whether the email was sent successfully and any errors.
  */
 func SendEmail(to string, subject string, body string) (bool, error) {
-	token := "<secret_token>"
+	token := os.Getenv("MAILTRAP_API_KEY")
 	httpHost := "https://send.api.mailtrap.io/api/send"
 	message := []byte(fmt.Sprintf(`{"from":{"email":"notiflash@zentools.in"},
 
