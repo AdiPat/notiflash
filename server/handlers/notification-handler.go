@@ -13,6 +13,11 @@ type NotificationRequest struct {
 }
 
 func NotificationHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "only POST is allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
 	var request NotificationRequest
 	body := json.NewDecoder(r.Body).Decode(&request)
 
