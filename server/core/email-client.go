@@ -2,6 +2,7 @@ package core
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -46,6 +47,10 @@ func SendEmail(to string, subject string, body string) (bool, error) {
 	}
 
 	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		return false, errors.New("failed to send email")
+	}
 
 	responseBody, err := io.ReadAll(res.Body)
 	if err != nil {
