@@ -7,5 +7,6 @@ import (
 
 func main() {
 	http.HandleFunc("/", handlers.HelloHandler)
+	http.HandleFunc("/notification", handlers.NotificationHandler)
 	http.ListenAndServe(":8080", nil)
 }
